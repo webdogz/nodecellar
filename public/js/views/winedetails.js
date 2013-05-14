@@ -10,10 +10,12 @@ window.WineView = Backbone.View.extend({
     },
 
     events: {
-        "change"        : "change",
-        "click .save"   : "beforeSave",
-        "click .delete" : "deleteWine",
-        "drop #picture" : "dropHandler"
+        "change"         : "change",
+        "click .save"    : "beforeSave",
+        "click .delete"  : "deleteWine",
+        "dragover #picture"  : "cancelBubble",
+        "dragenter #picture" : "cancelBubble",
+        "drop #picture"      : "dropHandler"
     },
 
     change: function (event) {
@@ -74,7 +76,8 @@ window.WineView = Backbone.View.extend({
     dropHandler: function (event) {
         event.stopPropagation();
         event.preventDefault();
-        var e = event.originalEvent;
+        var e = event.originalEvent,
+        	self = this;
         e.dataTransfer.dropEffect = 'copy';
         this.pictureFile = e.dataTransfer.files[0];
 
@@ -82,8 +85,15 @@ window.WineView = Backbone.View.extend({
         var reader = new FileReader();
         reader.onloadend = function () {
             $('#picture').attr('src', reader.result);
+            // fake event for this change
+            self.change({target:{name:"picture", value:reader.result, id:"picture"}});
         };
         reader.readAsDataURL(this.pictureFile);
+    },
+    
+    cancelBubble: function(e) {
+        e.preventDefault();
+        e.stopPropagation();
     }
 
 });
