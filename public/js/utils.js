@@ -1,5 +1,8 @@
 window.utils = {
-
+	
+	// cache alert box
+	$alert: $('.alert'),
+	
     // Asynchronously load templates located in separate .html files
     loadTemplate: function(views, callback) {
 
@@ -36,18 +39,18 @@ window.utils = {
     removeValidationError: function (field) {
         var controlGroup = $('#' + field).parent().parent();
         controlGroup.removeClass('error');
-        $('.help-inline', controlGroup).html('');
+        $('.help-inline', controlGroup).empty();
     },
 
     showAlert: function(title, text, klass) {
-        $('.alert').removeClass("alert-error alert-warning alert-success alert-info");
-        $('.alert').addClass(klass);
-        $('.alert').html('<strong>' + title + '</strong> ' + text);
-        $('.alert').show();
+        this.$alert.removeClass("alert-error alert-warning alert-success alert-info")
+			.addClass(klass)
+			.html('<strong>' + title + '</strong> ' + text)
+			.show();
     },
 
     hideAlert: function() {
-        $('.alert').hide();
+        this.$alert.hide();
     }
 
 };
