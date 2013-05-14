@@ -2,3 +2,5 @@
 /.idea
 Procfile
 .gitignore
+*.esproj/Project.espressostorage
+*.esproj/*.espressostorage
