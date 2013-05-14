@@ -1,9 +1,6 @@
 window.utils = {
 	
-	// cache alert box
-	$alert: $('.alert'),
-	
-    // Asynchronously load templates located in separate .html files
+	// Asynchronously load templates located in separate .html files
     loadTemplate: function(views, callback) {
 
         var deferreds = [];
@@ -43,14 +40,14 @@ window.utils = {
     },
 
     showAlert: function(title, text, klass) {
-        this.$alert.removeClass("alert-error alert-warning alert-success alert-info")
+        $('.alert').removeClass("alert-error alert-warning alert-success alert-info")
 			.addClass(klass)
 			.html('<strong>' + title + '</strong> ' + text)
 			.show();
     },
 
     hideAlert: function() {
-        this.$alert.hide();
+        $('.alert').hide();
     }
 
 };
